@@ -1,0 +1,9 @@
+FROM adiog/cling-python36
+
+RUN apt-get update \
+    && apt-get install -y wget \
+    && wget https://raw.githubusercontent.com/adiog/cling/master/tools/packaging/cpt.py \
+    && chmod +x cpt.py \
+    && ./cpt.py -y --check-requirements \
+    && ./cpt.py -y --create-dev-env Release --with-workdir=/cling --no-test
+

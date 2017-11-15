@@ -1,0 +1,18 @@
+FROM adiog/cling-cling
+
+RUN pip3.6 install --upgrade pip \ 
+    && pip3.6 install jupyter
+
+RUN rm -fr /cling/cling-Ubuntu-16.04-x86_64-0.6~dev-c513776/lib \
+    && ln -fs /cling/builddir/lib /cling/cling-Ubuntu-16.04-x86_64-0.6~dev-c513776/lib
+
+RUN cd /cling/cling-Ubuntu-16.04-x86_64-0.6~dev-c513776/share/cling/Jupyter/kernel \
+    && pip3.6 install -e . \
+    && jupyter kernelspec install --user cling-cpp11 \
+    && jupyter kernelspec install --user cling-cpp14 \
+    && jupyter kernelspec install --user cling-cpp17
+
+CMD export PATH=/cling/cling-Ubuntu-16.04-x86_64-0.6~dev-c513776/bin:$PATH \
+    && mkdir -p /Jupyter \
+    && jupyter notebook --port 8888 --ip 0.0.0.0 --notebook-dir=/Jupyter --allow-root
+

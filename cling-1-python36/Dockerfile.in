@@ -1,0 +1,20 @@
+FROM adiog/cling-ubuntu
+
+RUN apt-get update \
+    && apt-get install -y zlib1g-dev openssl libssl-dev \
+    && apt-get install -y libsqlite3-dev sqlite3 \
+    && git clone https://github.com/python/cpython \
+    && cd cpython \
+    && git checkout 3.6 \
+    && export CC=gcc \
+    && export CXX=g++ \
+    && ./configure --enable-loadable-sqlite-extensions \
+    && make -j 4 \
+    && make install \
+    && cd .. \
+    && rm -fr cpython
+
+RUN apt-get install -y virtualenv python-pip
+
+RUN pip install --upgrade pip
+
