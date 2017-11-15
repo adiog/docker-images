@@ -1,0 +1,24 @@
+FROM adiog/dev-cmake
+
+COPY llvm.sh /llvm.sh
+
+RUN /llvm.sh
+
+RUN mkdir -p /build \
+      && cd /build \
+      && cmake -DCMAKE_BUILD_TYPE=Release   \
+               -DCMAKE_INSTALL_PREFIX=/usr  \
+               -DLLVM_LIBDIR_SUFFIX=""      \
+               -DLLVM_TARGETS_TO_BUILD=X86  \
+               -DLLVM_BUILD_TOOLS=ON        \
+               -DLLVM_INCLUDE_TOOLS=ON      \
+               -DLLVM_BUILD_EXAMPLES=OFF    \
+               -DLLVM_INCLUDE_EXAMPLES=OFF  \
+               -DLLVM_BUILD_TESTS=OFF       \
+               -DLLVM_INCLUDE_TESTS=OFF     \
+               -DLLVM_ENABLE_THREADS=ON     \
+         /llvm \
+      && make -j 4 \
+      && make install \
+      && rm -fr /build && rm -fr /llvm
+
