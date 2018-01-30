@@ -7,7 +7,8 @@ export LOCALPORT=8888
 
 mkdir -p $LOCALDIR
 
-sudo docker run -it -p $LOCALPORT:8888 -v $LOCALDIR:/Jupyter adiog/cling-jupyter
+docker pull adiog/cling-jupyter
+docker run -it -p $LOCALPORT:8888 -v $LOCALDIR:/Jupyter adiog/cling-jupyter
 ```
 
 ## Building image locally:
