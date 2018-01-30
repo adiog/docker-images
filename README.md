@@ -2,7 +2,7 @@
 
 ```
 export LOCALDIR=$HOME/HostJupyterCling
-export LOCALPORT=5555
+export LOCALPORT=8888
 
 mkdir -p $LOCALDIR
 
