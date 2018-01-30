@@ -5,5 +5,5 @@
 cd $(dirname $0)
 
 cat Dockerfile.in | envsubst > Dockerfile
-sudo docker build -t adiog/cling-python36 .
+docker build -t adiog/cling-python36 .
 rm Dockerfile

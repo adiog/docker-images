@@ -5,6 +5,6 @@
 cd $(dirname $0)
 
 cat Dockerfile.in | envsubst > Dockerfile
-sudo docker build -t adiog/cling-cling .
+docker build -t adiog/cling-cling .
 rm Dockerfile
 
